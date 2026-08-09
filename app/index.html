@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Women's Health Risk Predictor | Breast Cancer Detection</title>
+  <meta name="description" content="AI-powered breast cancer risk assessment tool using clinical cell-level features. Get instant predictions with our machine learning model trained on the Wisconsin Breast Cancer dataset." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background particles -->
+  <div class="bg-gradient"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span class="logo-text">HealthAI</span>
+      </div>
+      <nav class="nav">
+        <a href="#predictor" class="nav-link">Predictor</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="https://github.com" target="_blank" class="nav-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Medical Risk Assessment
+      </div>
+      <h1 class="hero-title">
+        Predict Breast Cancer Risk<br/>
+        <span class="gradient-text">with Machine Learning</span>
+      </h1>
+      <p class="hero-subtitle">
+        Enter clinical cell-level feature values to receive an instant AI prediction 
+        for breast cancer risk classification — powered by models trained on the 
+        Wisconsin Breast Cancer dataset with <strong>97%+ accuracy</strong>.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">699</div>
+          <div class="stat-label">Training Samples</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-value">9</div>
+          <div class="stat-label">Clinical Features</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-value">97%+</div>
+          <div class="stat-label">Model Accuracy</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Models Compared</div>
+        </div>
+      </div>
+      <a href="#predictor" class="hero-cta">
+        Try the Predictor
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+    <div class="hero-visual">
+      <div class="dna-helix">
+        <div class="helix-rings">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+        </div>
+        <div class="pulse-circles">
+          <div class="pulse-circle pc-1"></div>
+          <div class="pulse-circle pc-2"></div>
+          <div class="pulse-circle pc-3"></div>
+        </div>
+        <div class="center-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+            <path d="M3.05 11a9 9 0 1 0 .5-2.6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Predictor Section -->
+  <section class="predictor-section" id="predictor">
+    <div class="section-header">
+      <h2 class="section-title">Risk Predictor</h2>
+      <p class="section-subtitle">Adjust the sliders to match clinical measurements (scale: 1–10)</p>
+    </div>
+
+    <div class="predictor-layout">
+      <!-- Feature Inputs -->
+      <div class="features-panel glass-card">
+        <div class="features-header">
+          <div class="features-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+          </div>
+          <h3>Cell Feature Input</h3>
+        </div>
+
+        <div class="features-grid" id="featuresGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="predictor-actions">
+          <button class="btn-predict" id="predictBtn" onclick="predict()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Analyze Risk
+          </button>
+          <button class="btn-reset" id="resetBtn" onclick="resetForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Panel -->
+      <div class="result-panel">
+        <div class="result-card glass-card" id="resultCard">
+          <div class="result-placeholder" id="resultPlaceholder">
+            <div class="placeholder-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4M12 8h.01"/>
+              </svg>
+            </div>
+            <p>Adjust the feature sliders and click <strong>Analyze Risk</strong> to get a prediction.</p>
+          </div>
+
+          <div class="result-content" id="resultContent" style="display:none;">
+            <div class="result-header" id="resultHeader">
+              <div class="result-icon" id="resultIcon"></div>
+              <div class="result-title" id="resultTitle"></div>
+            </div>
+            <div class="result-body">
+              <div class="confidence-section">
+                <div class="confidence-label">
+                  <span>Prediction Confidence</span>
+                  <span id="confidenceValue"></span>
+                </div>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" id="confidenceFill"></div>
+                </div>
+              </div>
+              <div class="risk-gauge" id="riskGauge">
+                <canvas id="gaugeCanvas" width="200" height="120"></canvas>
+                <div class="gauge-label" id="gaugeLabel"></div>
+              </div>
+              <div class="result-features-summary" id="featureSummary"></div>
+              <div class="result-disclaimer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                This tool is for educational purposes only. Always consult a qualified healthcare professional for medical diagnosis.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Importance Mini Chart -->
+        <div class="importance-card glass-card">
+          <h3 class="importance-title">Feature Impact</h3>
+          <div class="importance-bars" id="importanceBars"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="section-header">
+      <h2 class="section-title">About the Dataset</h2>
+      <p class="section-subtitle">Wisconsin Breast Cancer Dataset (UCI Machine Learning Repository)</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass-card">
+        <div class="about-card-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Data Overview</h3>
+        <p>699 patient samples collected from fine needle aspirates (FNA) of breast masses at the University of Wisconsin Hospital.</p>
+        <div class="about-stats">
+          <span class="tag">458 Benign (65.5%)</span>
+          <span class="tag tag-danger">241 Malignant (34.5%)</span>
+        </div>
+      </div>
+      <div class="about-card glass-card">
+        <div class="about-card-icon" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4l-7 7-4-4-6 6"/></svg>
+        </div>
+        <h3>Feature Scale</h3>
+        <p>All 9 clinical features are rated on a scale of <strong>1–10</strong>, where 1 is closest to normal and 10 is the most abnormal.</p>
+        <div class="about-stats">
+          <span class="tag">1 = Normal</span>
+          <span class="tag tag-danger">10 = Abnormal</span>
+        </div>
+      </div>
+      <div class="about-card glass-card">
+        <div class="about-card-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Model Performance</h3>
+        <p>Logistic Regression, Random Forest, SVM, KNN, and Gradient Boosting all trained and compared. Best model achieves 97%+ accuracy.</p>
+        <div class="about-stats">
+          <span class="tag tag-success">97%+ Accuracy</span>
+          <span class="tag tag-success">0.98+ ROC-AUC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-section" id="how-it-works">
+    <div class="section-header">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">From raw clinical data to risk prediction in milliseconds</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Input Cell Features</h3>
+          <p>Enter 9 clinical measurements from a fine needle aspirate biopsy, each scored 1–10.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>Feature Scaling</h3>
+          <p>Values are normalized using the same StandardScaler parameters from model training.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>ML Prediction</h3>
+          <p>The trained Logistic Regression model computes a probability score for malignancy.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3>Risk Classification</h3>
+          <p>Result is classified as <strong>Benign</strong> or <strong>Malignant</strong> with a confidence percentage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div class="logo-icon small">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span>HealthAI</span>
+      </div>
+      <p class="footer-text">
+        Built for educational purposes. Not intended for clinical use.<br/>
+        Data: <a href="https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original" target="_blank">UCI ML Repository — Wisconsin Breast Cancer</a>
+      </p>
+      <p class="footer-copy">© 2025 Women's Health Risk Predictor. Open Source.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
