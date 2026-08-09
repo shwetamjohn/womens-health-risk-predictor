@@ -57,29 +57,8 @@ FEATURES.forEach(f => { state.values[f.key] = 1; });
 
 // ─── Initialize UI ─────────────────────────────────────────────────────────────
 function init() {
-  createParticles();
   renderFeatureSliders();
   renderImportanceBars();
-}
-
-// Floating particles in background
-function createParticles() {
-  const container = document.getElementById('particles');
-  const colors = ['#6366f1', '#ec4899', '#06b6d4', '#10b981', '#f59e0b'];
-  for (let i = 0; i < 25; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 4 + 2;
-    p.style.cssText = `
-      width: ${size}px; height: ${size}px;
-      left: ${Math.random() * 100}%;
-      background: ${colors[Math.floor(Math.random() * colors.length)]};
-      animation-duration: ${Math.random() * 20 + 15}s;
-      animation-delay: ${Math.random() * 15}s;
-      opacity: 0;
-    `;
-    container.appendChild(p);
-  }
 }
 
 function getBadgeClass(val) {
@@ -178,8 +157,7 @@ function showResult(isMalignant, confidence, probMalignant) {
 
   const pct = Math.round(confidence * 100);
   confVal.textContent = `${pct}%`;
-  confFill.style.width = '0%';
-  setTimeout(() => { confFill.style.width = `${pct}%`; }, 50);
+  confFill.style.width = `${pct}%`;
 
   gaugeLabel.textContent = `Malignancy Probability: ${Math.round(probMalignant * 100)}%`;
   drawGauge(probMalignant);
@@ -193,9 +171,9 @@ function showResult(isMalignant, confidence, probMalignant) {
     const isHigh = val >= 7;
     const isMid = val >= 4;
     tag.style.cssText = `
-      background: ${isHigh ? 'rgba(239,68,68,0.1)' : isMid ? 'rgba(245,158,11,0.1)' : 'rgba(16,185,129,0.1)'};
-      color: ${isHigh ? '#f87171' : isMid ? '#fbbf24' : '#34d399'};
-      border-color: ${isHigh ? 'rgba(239,68,68,0.25)' : isMid ? 'rgba(245,158,11,0.25)' : 'rgba(16,185,129,0.25)'};
+      background: ${isHigh ? '#F5ECE7' : isMid ? '#FFFFE3' : '#EDF1EC'};
+      color: ${isHigh ? '#A8664F' : isMid ? '#6D8196' : '#6E8B7A'};
+      border-color: ${isHigh ? '#EAD9CE' : isMid ? '#CBCBCB' : '#DCE5DE'};
     `;
     tag.textContent = `${f.label}: ${val}`;
     summary.appendChild(tag);
@@ -221,15 +199,15 @@ function drawGauge(prob) {
   ctx.beginPath();
   ctx.arc(cx, cy, r, startAngle, endAngle);
   ctx.lineWidth = 14;
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.strokeStyle = '#CBCBCB';
   ctx.lineCap = 'round';
   ctx.stroke();
 
   // Color gradient arc
   const gradient = ctx.createLinearGradient(cx - r, cy, cx + r, cy);
-  gradient.addColorStop(0, '#10b981');
-  gradient.addColorStop(0.5, '#f59e0b');
-  gradient.addColorStop(1, '#ef4444');
+  gradient.addColorStop(0, '#6E8B7A');
+  gradient.addColorStop(0.5, '#6D8196');
+  gradient.addColorStop(1, '#A8664F');
 
   const fillAngle = startAngle + prob * Math.PI;
   ctx.beginPath();
@@ -247,19 +225,19 @@ function drawGauge(prob) {
   ctx.moveTo(cx, cy);
   ctx.lineTo(nx, ny);
   ctx.lineWidth = 3;
-  ctx.strokeStyle = '#f1f5f9';
+  ctx.strokeStyle = '#4A4A4A';
   ctx.lineCap = 'round';
   ctx.stroke();
 
   // Needle circle
   ctx.beginPath();
   ctx.arc(cx, cy, 6, 0, 2 * Math.PI);
-  ctx.fillStyle = '#f1f5f9';
+  ctx.fillStyle = '#4A4A4A';
   ctx.fill();
 
   // Labels
   ctx.font = '500 10px Inter, sans-serif';
-  ctx.fillStyle = '#64748b';
+  ctx.fillStyle = '#7A7A7A';
   ctx.textAlign = 'center';
   ctx.fillText('Benign', cx - r + 8, cy - 4);
   ctx.fillText('Malignant', cx + r - 8, cy - 4);
@@ -269,7 +247,7 @@ function drawGauge(prob) {
 function renderImportanceBars() {
   const container = document.getElementById('importanceBars');
   const maxImp = Math.max(...MODEL.importance);
-  const colors = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#f97316', '#a78bfa', '#34d399'];
+  const colors = ['#6D8196', '#7A8DA0', '#879AAA', '#94A6B4', '#A1B2BE', '#AEBEC8', '#BBCAD2', '#C8D6DC', '#4A4A4A'];
 
   const sorted = FEATURES.map((f, i) => ({ ...f, imp: MODEL.importance[i] }))
     .sort((a, b) => b.imp - a.imp);
@@ -280,20 +258,12 @@ function renderImportanceBars() {
       <div class="imp-bar-row">
         <span class="imp-label">${f.label}</span>
         <div class="imp-bar-track">
-          <div class="imp-bar-fill" style="width:${pct}%; background:${colors[i]};" data-pct="${pct}"></div>
+          <div class="imp-bar-fill" style="width:${pct}%; background:${colors[i]};"></div>
         </div>
         <span class="imp-pct">${(f.imp * 100).toFixed(1)}%</span>
       </div>
     `;
   }).join('');
-
-  // Animate bars in
-  setTimeout(() => {
-    document.querySelectorAll('.imp-bar-fill').forEach(el => {
-      el.style.width = '0%';
-      setTimeout(() => { el.style.width = el.dataset.pct + '%'; }, 100);
-    });
-  }, 50);
 }
 
 // ─── Reset ─────────────────────────────────────────────────────────────────────
